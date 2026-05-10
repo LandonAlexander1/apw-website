@@ -136,6 +136,59 @@
       font-size: 14px;
     }
 
+    /* LIGHTBOX */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(2,6,23,0.95);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      overflow: hidden;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+      transform: scale(0.8);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .lightbox.show img {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .lightbox span {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .lightbox .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 50px;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      padding: 10px;
+    }
+
+    .lightbox .prev { left: 20px; }
+    .lightbox .next { right: 20px; }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px);} 
       to { opacity: 1; transform: translateY(0);} 
@@ -178,7 +231,7 @@
 </header>
 
 <section id="home" class="hero">
-  <img src="logo.png" alt="APW Logo" class="logo">
+  <img src="logo.png" class="logo">
   <h2>Luxury Driveway & Sidewalk Cleaning</h2>
   <p>Professional results. Simple service. Reliable quality.</p>
 </section>
@@ -188,81 +241,40 @@
 
   <div class="service-box">
     <h3>Driveway Cleaning</h3>
-    <p>Deep clean your driveway and remove years of stains, dirt, algae, and buildup.</p>
+    <p>Deep clean your driveway and remove years of buildup.</p>
   </div>
 
   <div class="service-box">
     <h3>Sidewalk Cleaning</h3>
-    <p>Restore your sidewalks to a bright, safe, like-new condition.</p>
-  </div>
-
-  <div class="service-box">
-    <h3>Professional Pre-Treatment</h3>
-    <p>
-      We use a professional 4% sodium hypochlorite pre-treatment solution to break
-      down dirt, algae, mold, mildew, and organic buildup before surface cleaning.
-      This process helps deliver a deeper clean, brighter concrete, and
-      longer-lasting results.
-    </p>
+    <p>Restore your sidewalks to a bright, like-new condition.</p>
   </div>
 </section>
 
-<section class="services">
-  <h2>Service Requirements</h2>
+<!-- BEFORE & AFTER -->
+<section id="before-after">
+  <h2 style="color:#fff;">Before & After Results</h2>
+  <p>Click images to view full screen</p>
 
-  <div class="service-box">
-    <h3>Water & Power Access</h3>
-    <p>
-      To deliver the highest quality results, our cleaning process requires access
-      to your property's water supply and a standard electrical outlet.
-    </p>
-    <p>
-      We connect directly to your outdoor spigot to ensure consistent pressure and
-      efficient cleaning. A standard outlet may be used to power our equipment
-      when needed.
-    </p>
-    <p>
-      This setup allows us to provide a deeper, more effective clean while keeping
-      your service fast, safe, and reliable.
-    </p>
-  </div>
-</section>
-
-<!-- BEFORE & AFTER SECTION -->
-<section id="before-after" style="background:#020617; padding:70px 20px;">
-  <h2 style="text-align:center; color:#ffffff;">Before & After Results</h2>
-  <p style="text-align:center; color:#cbd5f5;">
-    See the difference our professional cleaning makes.
-  </p>
-
-  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:40px; margin-top:50px;">
+  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px;">
 
     <div style="width:300px;">
-      <div style="display:flex; border-radius:12px; overflow:hidden; box-shadow:0 0 20px rgba(0,0,0,0.6);">
-        <img src="before1.jpg" style="width:50%;">
-        <img src="after1.jpg" style="width:50%;">
-      </div>
+      <img src="before1.jpg" onclick="openLightbox(0)" style="width:50%;cursor:pointer;">
+      <img src="after1.jpg" onclick="openLightbox(1)" style="width:50%;cursor:pointer;">
     </div>
 
     <div style="width:300px;">
-      <div style="display:flex; border-radius:12px; overflow:hidden; box-shadow:0 0 20px rgba(0,0,0,0.6);">
-        <img src="before2.jpg" style="width:50%;">
-        <img src="after2.jpg" style="width:50%;">
-      </div>
+      <img src="before2.jpg" onclick="openLightbox(2)" style="width:50%;cursor:pointer;">
+      <img src="after2.jpg" onclick="openLightbox(3)" style="width:50%;cursor:pointer;">
     </div>
 
     <div style="width:300px;">
-      <div style="display:flex; border-radius:12px; overflow:hidden; box-shadow:0 0 20px rgba(0,0,0,0.6);">
-        <img src="before3.jpg" style="width:50%;">
-        <img src="after3.jpg" style="width:50%;">
-      </div>
+      <img src="before3.jpg" onclick="openLightbox(4)" style="width:50%;cursor:pointer;">
+      <img src="after3.jpg" onclick="openLightbox(5)" style="width:50%;cursor:pointer;">
     </div>
 
     <div style="width:300px;">
-      <div style="display:flex; border-radius:12px; overflow:hidden; box-shadow:0 0 20px rgba(0,0,0,0.6);">
-        <img src="before4.jpg" style="width:50%;">
-        <img src="after4.jpg" style="width:50%;">
-      </div>
+      <img src="before4.jpg" onclick="openLightbox(6)" style="width:50%;cursor:pointer;">
+      <img src="after4.jpg" onclick="openLightbox(7)" style="width:50%;cursor:pointer;">
     </div>
 
   </div>
@@ -270,31 +282,66 @@
 
 <section id="quote" class="quote">
   <h2>Get Your Free Quote</h2>
-  <p>Call now for a fast and free estimate</p>
-
-  <div class="arrow">⬇</div>
   <div class="phone">(445-252-1492)</div>
-
   <button onclick="window.location.href='tel:14452521492'">Call Now</button>
 </section>
 
 <footer>
-  <p>© 2026 APW - Alexander Pressure Washing</p>
+  <p>© 2026 APW</p>
 </footer>
 
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox">
+  <span onclick="closeLightbox()">&times;</span>
+  <div class="nav prev" onclick="changeImage(-1)">❮</div>
+  <img id="lightbox-img">
+  <div class="nav next" onclick="changeImage(1)">❯</div>
+</div>
+
 <script>
-  document.querySelectorAll('nav a').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    });
-  });
+const images = [
+  "before1.jpg","after1.jpg",
+  "before2.jpg","after2.jpg",
+  "before3.jpg","after3.jpg",
+  "before4.jpg","after4.jpg"
+];
+
+let currentIndex = 0;
+
+function openLightbox(index) {
+  currentIndex = index;
+  const lb = document.getElementById("lightbox");
+  const img = document.getElementById("lightbox-img");
+  img.src = images[currentIndex];
+  lb.style.display = "flex";
+  setTimeout(()=>lb.classList.add("show"),10);
+}
+
+function closeLightbox() {
+  const lb = document.getElementById("lightbox");
+  lb.classList.remove("show");
+  setTimeout(()=>lb.style.display="none",300);
+}
+
+function changeImage(dir){
+  currentIndex=(currentIndex+dir+images.length)%images.length;
+  document.getElementById("lightbox-img").src=images[currentIndex];
+}
+
+// swipe
+let startX=0;
+const lb=document.getElementById("lightbox");
+
+lb.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
+lb.addEventListener("touchend",e=>{
+  let endX=e.changedTouches[0].clientX;
+  if(startX-endX>50)changeImage(1);
+  if(endX-startX>50)changeImage(-1);
+});
+
+lb.addEventListener("click",e=>{
+  if(e.target===lb)closeLightbox();
+});
 </script>
 
 </body>
