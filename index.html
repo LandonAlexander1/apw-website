@@ -1,346 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>APW - Alexander Pressure Washing</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APW - Alexander Pressure Washing</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #020617, #0f172a);
-      color: #f8fafc;
-      scroll-behavior: smooth;
-    }
+<style>
+body {
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#020617,#0f172a);
+  color:#f8fafc;
+  scroll-behavior:smooth;
+}
 
-    header {
-      background: rgba(2,6,23,0.9);
-      backdrop-filter: blur(8px);
-      padding: 20px;
-      text-align: center;
-      border-bottom: 1px solid #1e293b;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+header {
+  background:rgba(2,6,23,0.9);
+  padding:20px;
+  text-align:center;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
 
-    header h1 {
-      margin: 0;
-      font-size: 34px;
-      letter-spacing: 3px;
-    }
+nav a {
+  margin:0 15px;
+  color:#38bdf8;
+  text-decoration:none;
+}
 
-    nav a {
-      margin: 0 15px;
-      color: #38bdf8;
-      text-decoration: none;
-      font-size: 18px;
-      transition: 0.3s;
-    }
+nav a:hover { color:#22c55e; }
 
-    nav a:hover {
-      color: #22c55e;
-    }
+section {
+  padding:70px 20px;
+  text-align:center;
+  scroll-margin-top:100px;
+}
 
-    section {
-      padding: 70px 20px;
-      text-align: center;
-      scroll-margin-top: 100px;
-    }
+.logo {
+  width:260px;
+  margin:20px 0;
+}
 
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      animation: fadeIn 1.5s ease;
-    }
+.services { background:#020617; }
 
-    .logo {
-      width: 260px;
-      margin: 20px 0;
-      animation: float 4s ease-in-out infinite;
-      filter: drop-shadow(0 0 20px rgba(56,189,248,0.5));
-    }
+.service-box {
+  margin:25px auto;
+  max-width:420px;
+  padding:25px;
+  border-radius:15px;
+  background:#0f172a;
+}
 
-    h2 {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
+.phone {
+  font-size:32px;
+  color:#22c55e;
+}
 
-    p {
-      font-size: 18px;
-      color: #cbd5f5;
-    }
+button {
+  padding:15px 30px;
+  background:#38bdf8;
+  border:none;
+  border-radius:10px;
+  color:#fff;
+  cursor:pointer;
+}
 
-    .services {
-      background: #020617;
-    }
+/* LIGHTBOX */
+.lightbox {
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.95);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
 
-    .service-box {
-      margin: 25px auto;
-      max-width: 420px;
-      padding: 25px;
-      border-radius: 15px;
-      background: linear-gradient(145deg, #0f172a, #020617);
-      box-shadow: 0 0 20px rgba(0,0,0,0.6);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+.lightbox img {
+  max-width:90%;
+  max-height:90%;
+  border-radius:12px;
+  transform:scale(.8);
+  opacity:0;
+  transition:.3s;
+}
 
-    .service-box:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 0 25px rgba(56,189,248,0.3);
-    }
+.lightbox.show img {
+  transform:scale(1);
+  opacity:1;
+}
 
-    .quote {
-      font-size: 22px;
-      background: linear-gradient(135deg, #020617, #0f172a);
-    }
+.lightbox span {
+  position:absolute;
+  top:20px;
+  right:30px;
+  font-size:40px;
+  cursor:pointer;
+}
 
-    .arrow {
-      font-size: 50px;
-      margin: 20px 0;
-      color: #38bdf8;
-      animation: bounce 1.5s infinite;
-    }
+.nav {
+  position:absolute;
+  top:50%;
+  font-size:50px;
+  cursor:pointer;
+}
 
-    .phone {
-      font-size: 32px;
-      font-weight: bold;
-      color: #22c55e;
-      margin-bottom: 20px;
-    }
+.prev { left:20px; }
+.next { right:20px; }
 
-    button {
-      padding: 15px 30px;
-      font-size: 18px;
-      background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      color: #fff;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(56,189,248,0.6);
-    }
-
-    footer {
-      padding: 20px;
-      text-align: center;
-      background: #020617;
-      border-top: 1px solid #1e293b;
-      font-size: 14px;
-    }
-
-    /* LIGHTBOX */
-    .lightbox {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(2,6,23,0.95);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      overflow: hidden;
-    }
-
-    .lightbox img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 12px;
-      transform: scale(0.8);
-      opacity: 0;
-      transition: all 0.3s ease;
-    }
-
-    .lightbox.show img {
-      transform: scale(1);
-      opacity: 1;
-    }
-
-    .lightbox span {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 40px;
-      color: white;
-      cursor: pointer;
-      z-index: 10;
-    }
-
-    .lightbox .nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 50px;
-      color: white;
-      cursor: pointer;
-      user-select: none;
-      padding: 10px;
-    }
-
-    .lightbox .prev { left: 20px; }
-    .lightbox .next { right: 20px; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px);} 
-      to { opacity: 1; transform: translateY(0);} 
-    }
-
-    @keyframes float {
-      0%,100% { transform: translateY(0);} 
-      50% { transform: translateY(-10px);} 
-    }
-
-    @keyframes bounce {
-      0%,100% { transform: translateY(0);} 
-      50% { transform: translateY(10px);} 
-    }
-
-    @media (max-width: 600px) {
-      nav a {
-        display: block;
-        margin: 10px 0;
-      }
-
-      .logo {
-        width: 200px;
-      }
-    }
-  </style>
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>APW</h1>
-  <p>Alexander Pressure Washing</p>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#services">Services</a>
-    <a href="#before-after">Results</a>
-    <a href="#quote">Free Quote</a>
-  </nav>
+<h1>APW</h1>
+<p>Alexander Pressure Washing</p>
+<nav>
+<a href="#home">Home</a>
+<a href="#services">Services</a>
+<a href="#requirements">Requirements</a>
+<a href="#before-after">Results</a>
+<a href="#quote">Quote</a>
+</nav>
 </header>
 
-<section id="home" class="hero">
-  <img src="logo.png" class="logo">
-  <h2>Luxury Driveway & Sidewalk Cleaning</h2>
-  <p>Professional results. Simple service. Reliable quality.</p>
+<section id="home">
+<img src="logo.png" class="logo">
+<h2>Luxury Driveway & Sidewalk Cleaning</h2>
+<p>Professional results. Reliable service.</p>
 </section>
 
 <section id="services" class="services">
-  <h2>Our Services</h2>
+<h2>Our Services</h2>
 
-  <div class="service-box">
-    <h3>Driveway Cleaning</h3>
-    <p>Deep clean your driveway and remove years of buildup.</p>
-  </div>
+<div class="service-box">
+<h3>Driveway Cleaning</h3>
+<p>Remove years of dirt, stains, and buildup.</p>
+</div>
 
-  <div class="service-box">
-    <h3>Sidewalk Cleaning</h3>
-    <p>Restore your sidewalks to a bright, like-new condition.</p>
-  </div>
+<div class="service-box">
+<h3>Sidewalk Cleaning</h3>
+<p>Restore sidewalks to a bright, like-new condition.</p>
+</div>
+
+<div class="service-box">
+<h3>Professional Pre-Treatment</h3>
+<p>We apply a cleaning solution to break down algae, mold, and buildup before cleaning.</p>
+<p>This ensures deeper, longer-lasting results.</p>
+</div>
+
 </section>
 
-<!-- BEFORE & AFTER -->
+<section id="requirements" class="services">
+<h2>Service Requirements</h2>
+
+<div class="service-box">
+<h3>Water & Power Access</h3>
+<p>We require access to your water supply and a standard outlet.</p>
+<p>This allows us to deliver the highest quality clean safely and efficiently.</p>
+</div>
+</section>
+
 <section id="before-after">
-  <h2 style="color:#fff;">Before & After Results</h2>
-  <p>Click images to view full screen</p>
+<h2 style="color:#fff;">Before & After Results</h2>
+<p>Click images to view full screen</p>
 
-  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px;">
+<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:30px;">
 
-    <div style="width:300px;">
-      <img src="before1.jpg" onclick="openLightbox(0)" style="width:50%;cursor:pointer;">
-      <img src="after1.jpg" onclick="openLightbox(1)" style="width:50%;cursor:pointer;">
-    </div>
+<div>
+<img src="before1.jpg" onclick="openLightbox(0)" style="width:150px;cursor:pointer;">
+<img src="after1.jpg" onclick="openLightbox(1)" style="width:150px;cursor:pointer;">
+</div>
 
-    <div style="width:300px;">
-      <img src="before2.jpg" onclick="openLightbox(2)" style="width:50%;cursor:pointer;">
-      <img src="after2.jpg" onclick="openLightbox(3)" style="width:50%;cursor:pointer;">
-    </div>
+<div>
+<img src="before2.jpg" onclick="openLightbox(2)" style="width:150px;cursor:pointer;">
+<img src="after2.jpg" onclick="openLightbox(3)" style="width:150px;cursor:pointer;">
+</div>
 
-    <div style="width:300px;">
-      <img src="before3.jpg" onclick="openLightbox(4)" style="width:50%;cursor:pointer;">
-      <img src="after3.jpg" onclick="openLightbox(5)" style="width:50%;cursor:pointer;">
-    </div>
+<div>
+<img src="before3.jpg" onclick="openLightbox(4)" style="width:150px;cursor:pointer;">
+<img src="after3.jpg" onclick="openLightbox(5)" style="width:150px;cursor:pointer;">
+</div>
 
-    <div style="width:300px;">
-      <img src="before4.jpg" onclick="openLightbox(6)" style="width:50%;cursor:pointer;">
-      <img src="after4.jpg" onclick="openLightbox(7)" style="width:50%;cursor:pointer;">
-    </div>
+<div>
+<img src="before4.jpg" onclick="openLightbox(6)" style="width:150px;cursor:pointer;">
+<img src="after4.jpg" onclick="openLightbox(7)" style="width:150px;cursor:pointer;">
+</div>
 
-  </div>
+</div>
 </section>
 
-<section id="quote" class="quote">
-  <h2>Get Your Free Quote</h2>
-  <div class="phone">(445-252-1492)</div>
-  <button onclick="window.location.href='tel:14452521492'">Call Now</button>
+<section id="quote">
+<h2>Get Your Free Quote</h2>
+<div class="phone">(445-252-1492)</div>
+<button onclick="window.location.href='tel:14452521492'">Call Now</button>
 </section>
 
 <footer>
-  <p>© 2026 APW</p>
+<p>© 2026 APW</p>
 </footer>
 
-<!-- LIGHTBOX -->
 <div id="lightbox" class="lightbox">
-  <span onclick="closeLightbox()">&times;</span>
-  <div class="nav prev" onclick="changeImage(-1)">❮</div>
-  <img id="lightbox-img">
-  <div class="nav next" onclick="changeImage(1)">❯</div>
+<span onclick="closeLightbox()">&times;</span>
+<div class="nav prev" onclick="changeImage(-1)">❮</div>
+<img id="lightbox-img">
+<div class="nav next" onclick="changeImage(1)">❯</div>
 </div>
 
 <script>
-const images = [
-  "before1.jpg","after1.jpg",
-  "before2.jpg","after2.jpg",
-  "before3.jpg","after3.jpg",
-  "before4.jpg","after4.jpg"
+const images=[
+"before1.jpg","after1.jpg",
+"before2.jpg","after2.jpg",
+"before3.jpg","after3.jpg",
+"before4.jpg","after4.jpg"
 ];
 
-let currentIndex = 0;
+let i=0;
 
-function openLightbox(index) {
-  currentIndex = index;
-  const lb = document.getElementById("lightbox");
-  const img = document.getElementById("lightbox-img");
-  img.src = images[currentIndex];
-  lb.style.display = "flex";
-  setTimeout(()=>lb.classList.add("show"),10);
+function openLightbox(index){
+i=index;
+let lb=document.getElementById("lightbox");
+let img=document.getElementById("lightbox-img");
+img.src=images[i];
+lb.style.display="flex";
+setTimeout(()=>lb.classList.add("show"),10);
 }
 
-function closeLightbox() {
-  const lb = document.getElementById("lightbox");
-  lb.classList.remove("show");
-  setTimeout(()=>lb.style.display="none",300);
+function closeLightbox(){
+let lb=document.getElementById("lightbox");
+lb.classList.remove("show");
+setTimeout(()=>lb.style.display="none",300);
 }
 
-function changeImage(dir){
-  currentIndex=(currentIndex+dir+images.length)%images.length;
-  document.getElementById("lightbox-img").src=images[currentIndex];
+function changeImage(d){
+i=(i+d+images.length)%images.length;
+document.getElementById("lightbox-img").src=images[i];
 }
 
-// swipe
 let startX=0;
-const lb=document.getElementById("lightbox");
+let lb=document.getElementById("lightbox");
 
 lb.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
 lb.addEventListener("touchend",e=>{
-  let endX=e.changedTouches[0].clientX;
-  if(startX-endX>50)changeImage(1);
-  if(endX-startX>50)changeImage(-1);
+let endX=e.changedTouches[0].clientX;
+if(startX-endX>50)changeImage(1);
+if(endX-startX>50)changeImage(-1);
 });
 
 lb.addEventListener("click",e=>{
-  if(e.target===lb)closeLightbox();
+if(e.target===lb)closeLightbox();
 });
 </script>
 
