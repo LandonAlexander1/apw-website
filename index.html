@@ -37,9 +37,33 @@ section {
   scroll-margin-top:100px;
 }
 
+/* 🔥 LOGO ANIMATION */
 .logo {
   width:260px;
   margin:20px 0;
+
+  opacity: 0;
+  transform: translateY(30px);
+  animation: logoFadeIn 1.2s ease forwards, float 4s ease-in-out infinite 1.2s;
+
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 15px rgba(56,189,248,0.6));
+}
+
+@keyframes logoFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 .services { background:#020617; }
@@ -255,7 +279,7 @@ lb.addEventListener("click",e=>{
 if(e.target===lb)closeLightbox();
 });
 
-// 🔥 SMOOTH SCROLL (NEW)
+// SMOOTH SCROLL
 document.querySelectorAll('nav a').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     e.preventDefault();
